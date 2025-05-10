@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('./middleware/authMiddleware'); // Middleware for authentication
+const { upload } = require('./middleware/multerMiddleware'); // Middleware for file uploads
 
 
 const { registerUser, loginUser, logoutUser, updateUserProfile } = require('../controllers/authController');
@@ -34,7 +35,12 @@ router.get('/reports/:id/comments', authenticateToken, getComments);
 router.post('/reports/:id/comments', authenticateToken, postComment);
 
 // Report Images
-router.post('/reports/:id/images', authenticateToken, uploadReportImage);
+router.post(
+  '/reports/:id/images',
+  authenticateToken,
+  upload.array('images', 5), // handle multiple files named "images", max 5
+  uploadReportImage
+);
 
 // Alerts
 router.get('/alerts', authenticateToken, getAlerts);
