@@ -1,32 +1,17 @@
 const express = require('express');
+const { registerUser } = require('../controllers/authController');
 const router = express.Router();
-const {
-  registerUser,
-  loginUser,
-  logoutUser,
-  updateUserProfile,
-  createReport,
-  getAllReportsWithVotesAndImages,
-  getReportByIdWithVotesAndImages,
-  updateReport,
-  deleteReport,
-  voteOnReport,
-  getComments,
-  postComment,
-  uploadReportImage,
-  getAlerts,
-  getAlertById,
-  createAlert,
-  updateAlert,
-  deleteAlert,
-  getDepartments,
-  createDepartment,
-  updateDepartment,
-  deleteDepartment,
-  assignDepartmentToReport,
-  getAllUsers,
-  updateUserRoleOrStatus
-} = require('../controllers');
+
+
+const { registerUser, loginUser, logoutUser, updateUserProfile } = require('../controllers/authController');
+const { createReport, getAllReportsWithVotesAndImages, getReportByIdWithVotesAndImages, updateReport, deleteReport } = require('../controllers/reportController');
+const { voteOnReport } = require('../controllers/voteController');
+const { getComments, postComment } = require('../controllers/commentController');
+const { uploadReportImage } = require('../controllers/imageController');
+const { getAlerts, createAlert, updateAlert, deleteAlert, getAlertById } = require('../controllers/alertController');
+const { getDepartments, createDepartment, updateDepartment, deleteDepartment, assignDepartmentToReport } = require('../controllers/departmentController');
+const { getAllUsers, updateUserRoleOrStatus } = require('../controllers/userController');
+
 
 // Auth
 router.post('/register', registerUser);
