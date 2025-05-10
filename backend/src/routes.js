@@ -1,7 +1,32 @@
-// src/routes/index.js
-
 const express = require('express');
 const router = express.Router();
+const {
+  registerUser,
+  loginUser,
+  logoutUser,
+  updateUserProfile,
+  createReport,
+  getAllReportsWithVotesAndImages,
+  getReportByIdWithVotesAndImages,
+  updateReport,
+  deleteReport,
+  voteOnReport,
+  getComments,
+  postComment,
+  uploadReportImage,
+  getAlerts,
+  getAlertById,
+  createAlert,
+  updateAlert,
+  deleteAlert,
+  getDepartments,
+  createDepartment,
+  updateDepartment,
+  deleteDepartment,
+  assignDepartmentToReport,
+  getAllUsers,
+  updateUserRoleOrStatus
+} = require('../controllers');
 
 // Auth
 router.post('/register', registerUser);
