@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticateToken } = require('./middleware/authMiddleware'); // Middleware for authentication
 
 
 const { registerUser, loginUser, logoutUser, updateUserProfile } = require('../controllers/authController');
@@ -15,43 +16,43 @@ const { getAllUsers, updateUserRoleOrStatus } = require('../controllers/userCont
 // Auth
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.post('/logout', logoutUser);
-router.post('/profile', updateUserProfile);
+router.post('/logout', authenticateToken, logoutUser);
+router.post('/profile', authenticateToken, updateUserProfile);
 
 // Reports
-router.post('/reports', createReport);
-router.get('/reports', getAllReportsWithVotesAndImages);
-router.get('/reports/:id', getReportByIdWithVotesAndImages);
-router.put('/reports/:id', updateReport);
-router.delete('/reports/:id', deleteReport);
+router.post('/reports', authenticateToken, createReport);
+router.get('/reports', authenticateToken, getAllReportsWithVotesAndImages);
+router.get('/reports/:id', authenticateToken, getReportByIdWithVotesAndImages);
+router.put('/reports/:id', authenticateToken, updateReport);
+router.delete('/reports/:id', authenticateToken, deleteReport);
 
 // Votes
-router.post('/reports/:id/vote', voteOnReport);
+router.post('/reports/:id/vote', authenticateToken, voteOnReport);
 
 // Comments
-router.get('/reports/:id/comments', getComments);
-router.post('/reports/:id/comments', postComment);
+router.get('/reports/:id/comments', authenticateToken, getComments);
+router.post('/reports/:id/comments', authenticateToken, postComment);
 
 // Report Images
-router.post('/reports/:id/images', uploadReportImage);
+router.post('/reports/:id/images', authenticateToken, uploadReportImage);
 
 // Alerts
-router.get('/alerts', getAlerts);
-router.get('/alerts/:id', getAlertById);
-router.post('/alerts', createAlert);
-router.put('/alerts/:id', updateAlert);
-router.delete('/alerts/:id', deleteAlert);
+router.get('/alerts', authenticateToken, getAlerts);
+router.get('/alerts/:id', authenticateToken, getAlertById);
+router.post('/alerts', authenticateToken, createAlert);
+router.put('/alerts/:id', authenticateToken, updateAlert);
+router.delete('/alerts/:id', authenticateToken, deleteAlert);
 
 // Departments
-router.get('/departments', getDepartments);
-router.post('/departments', createDepartment);
-router.put('/departments/:id', updateDepartment);
-router.delete('/departments/:id', deleteDepartment);
-router.post('/departments/:id/assign/:departmentId', assignDepartmentToReport);
+router.get('/departments', authenticateToken, getDepartments);
+router.post('/departments', authenticateToken, createDepartment);
+router.put('/departments/:id', authenticateToken, updateDepartment);
+router.delete('/departments/:id', authenticateToken, deleteDepartment);
+router.post('/departments/:id/assign/:departmentId', authenticateToken, assignDepartmentToReport);
 
 // Admin
-router.get('/admin/users', getAllUsers);
-router.put('/admin/users/:id', updateUserRoleOrStatus);
+router.get('/admin/users', authenticateToken, getAllUsers);
+router.put('/admin/users/:id', authenticateToken, updateUserRoleOrStatus);
 
 module.exports = router;
 
