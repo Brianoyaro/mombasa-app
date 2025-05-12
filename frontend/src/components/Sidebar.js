@@ -36,18 +36,33 @@
 import React from 'react';
 
 const Sidebar = ({ isOpen, closeSidebar, isMobile }) => {
+  const baseClasses =
+    'bg-white shadow-lg h-full z-40 transform transition-transform duration-300 ease-in-out';
+
   return (
-    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-40 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out ${isMobile ? '' : 'hidden md:block'}`}>
+    <aside
+      className={`${baseClasses} ${
+        isMobile
+          ? `fixed top-0 left-0 w-64 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+          : 'hidden md:block md:fixed md:left-0 md:top-14 md:w-64'
+      }`}
+    >
       <div className="p-4 border-b font-semibold text-lg">Menu</div>
       <div className="p-4 space-y-2">
         <a href="/activity" className="block hover:text-blue-600">Recent Activity</a>
         <a href="/profile" className="block hover:text-blue-600">Profile</a>
         <a href="/logout" className="block hover:text-red-600">Logout</a>
       </div>
+
       {isMobile && (
-        <button onClick={closeSidebar} className="absolute top-4 right-4 text-gray-500">✕</button>
+        <button
+          onClick={closeSidebar}
+          className="absolute top-4 right-4 text-gray-500"
+        >
+          ✕
+        </button>
       )}
-    </div>
+    </aside>
   );
 };
 
