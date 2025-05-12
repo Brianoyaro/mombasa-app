@@ -35,7 +35,7 @@
 // Sidebar.jsx
 import React from 'react';
 
-const Sidebar = ({ isOpen, toggleSidebar, isMobile }) => {
+const Sidebar = ({ isOpen, closeSidebar, isMobile }) => {
   return (
     <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-40 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out ${isMobile ? '' : 'hidden md:block'}`}>
       <div className="p-4 border-b font-semibold text-lg">Menu</div>
@@ -45,7 +45,7 @@ const Sidebar = ({ isOpen, toggleSidebar, isMobile }) => {
         <a href="/logout" className="block hover:text-red-600">Logout</a>
       </div>
       {isMobile && (
-        <button onClick={toggleSidebar} className="absolute top-4 right-4 text-gray-500">✕</button>
+        <button onClick={closeSidebar} className="absolute top-4 right-4 text-gray-500">✕</button>
       )}
     </div>
   );

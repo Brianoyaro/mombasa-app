@@ -1,14 +1,13 @@
-// Navbar.jsx
 import React from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar = ({ toggleSidebar, isMobile, isSidebarOpen }) => {
+const Navbar = ({ openSidebar, isMobile, isSidebarOpen }) => {
   return (
     <nav className="flex items-center justify-between px-4 py-2 shadow bg-white fixed w-full top-0 z-50">
       <div className="text-xl font-bold">MyApp</div>
 
       {isMobile ? (
-        <button onClick={toggleSidebar} className="p-2 rounded">
+        <button onClick={openSidebar} className="p-2 rounded">
           {isSidebarOpen ? <X /> : <Menu />}
         </button>
       ) : (
