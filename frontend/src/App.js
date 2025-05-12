@@ -1,10 +1,17 @@
+// src/App.jsx
 import React from 'react';
+import MainLayout from './components/layout/MainLayout';
+import ReportList from './components/ReportList';
+// import ReportForm from './components/ReportForm';
+// Import routes as needed
 
-
-function App() {
+const App = () => {
   return (
-    <h1>Welcome to my app</h1>
+    <MainLayout>
+      {/* Routes or component views go here */}
+      <ReportList />
+    </MainLayout>
   );
-}
+};
 
 export default App;
