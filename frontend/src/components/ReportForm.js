@@ -143,6 +143,7 @@ const ReportForm = () => {
           type="file"
           accept="image/*"
           multiple
+          capture="environment"
           onChange={handleImageChange}
           className="w-full"
         />
