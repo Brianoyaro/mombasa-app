@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken } = require('./middleware/authMiddleware'); // Middleware for authentication
-const { upload } = require('./middleware/multerMiddleware'); // Middleware for file uploads
+const { authenticateToken } = require('../middleware/authMiddleware'); // Middleware for authentication
+const { upload } = require('../middleware/multerMiddleware'); // Middleware for file uploads
 
 
 const { registerUser, loginUser, logoutUser, updateUserProfile } = require('../controllers/authController');
