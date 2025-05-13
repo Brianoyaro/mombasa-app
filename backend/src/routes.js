@@ -17,6 +17,11 @@ const { getAllUsers, updateUserRoleOrStatus } = require('../controllers/userCont
 // Auth
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+
+console.log(typeof authenticateToken); // should log 'function'
+console.log(typeof logoutUser);        // should log 'function'
+
+
 router.post('/logout', authenticateToken, logoutUser);
 router.post('/profile', authenticateToken, updateUserProfile);
 
