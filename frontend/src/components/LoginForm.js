@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+const axios = require('axios');
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
   const handleChange = (e) => {
     setFormData({ 
@@ -18,21 +21,13 @@ const LoginForm = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // If using cookies for auth
-        body: JSON.stringify(formData),
+      const response = await axios.post(`${baseURL}/login`, formData, {
+        withCredentials: true, // If using cookies for auth
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
+      const data = response.data;
+      if (!response.status === 200) {
         throw new Error(data.message || 'Login failed');
       }
-
       // You can store token in localStorage or redirect as needed
       console.log('Login successful:', data);
       // Example: localStorage.setItem('token', data.token);

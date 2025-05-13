@@ -8,6 +8,8 @@ const UserProfile = () => {
     phone_number: ''
   });
 
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
@@ -15,7 +17,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/profile', {
+        const res = await axios.get(`${baseURL}/profile`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -43,7 +45,7 @@ const UserProfile = () => {
     try {
       const { username, phone_number } = formData;
       await axios.post(
-        'http://localhost:5000/profile',
+        `${baseURL}/profile`,
         { username, phone_number },
         {
           headers: { Authorization: `Bearer ${token}` }

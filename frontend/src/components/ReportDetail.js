@@ -10,6 +10,8 @@ const ReportDetail = () => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
   useEffect(() => {
     // Assuming current user is stored in localStorage as a JSON string
     const user = JSON.parse(localStorage.getItem('user'));
@@ -17,10 +19,10 @@ const ReportDetail = () => {
 
     const fetchData = async () => {
       try {
-        const reportRes = await axios.get(`http://localhost:3000/reports/${id}`);
+        const reportRes = await axios.get(`${baseURL}/reports/${id}`);
         setReport(reportRes.data);
 
-        const commentsRes = await axios.get(`http://localhost:3000/reports/${id}/comments`);
+        const commentsRes = await axios.get(`${baseURL}/reports/${id}/comments`);
         setComments(commentsRes.data);
       } catch (err) {
         console.error('Failed to fetch report or comments', err);
@@ -37,7 +39,7 @@ const ReportDetail = () => {
     if (!commentInput.trim()) return;
 
     try {
-      const res = await axios.post(`http://localhost:3000/reports/${id}/comments`, {
+      const res = await axios.post(`${baseURL}/reports/${id}/comments`, {
         text: commentInput,
       });
 
@@ -51,8 +53,8 @@ const ReportDetail = () => {
 
   const handleVote = async (type) => {
     try {
-      await axios.post(`http://localhost:3000/reports/${id}/vote`, { type });
-      const updatedReport = await axios.get(`http://localhost:3000/reports/${id}`);
+      await axios.post(`${baseURL}/reports/${id}/vote`, { type });
+      const updatedReport = await axios.get(`${baseURL}/reports/${id}`);
       setReport(updatedReport.data);
     } catch (err) {
       console.error('Vote failed', err);

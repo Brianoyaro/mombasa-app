@@ -2,6 +2,8 @@ import React from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = ({ openSidebar, isMobile, isSidebarOpen }) => {
+  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
   return (
     <nav className="flex items-center justify-between px-4 py-2 shadow bg-white fixed w-full top-0 z-50">
       <div className="text-xl font-bold">MyApp</div>

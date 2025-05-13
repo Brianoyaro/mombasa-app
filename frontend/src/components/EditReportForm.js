@@ -5,8 +5,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 const EditReportForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const baseURL = 'http://localhost:5000';
-
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');

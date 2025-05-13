@@ -16,6 +16,7 @@ const RegistrationForm = () => {
   const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +46,7 @@ const RegistrationForm = () => {
 
     try {
       const { username, email, password, phone_number } = formData;
-      await axios.post('http://localhost:5000/register', {
+      await axios.post(`${baseURL}/register`, {
         username,
         email,
         password,

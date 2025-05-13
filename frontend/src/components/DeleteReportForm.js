@@ -8,7 +8,7 @@ const DeleteReportForm = ({ reportId }) => {
   const [confirming, setConfirming] = useState(false);
   const navigate = useNavigate();
 
-  const baseURL = 'http://localhost:5000';
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   const handleDelete = async () => {
     try {

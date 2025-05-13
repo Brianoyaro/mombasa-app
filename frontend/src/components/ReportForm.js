@@ -8,8 +8,9 @@ const ReportForm = () => {
   const [useAutoLocation, setUseAutoLocation] = useState(false);
   const [images, setImages] = useState([]);
 
-  const baseURL = 'http://localhost:5000';
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
+  
   const handleLocationDetection = () => {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser.');

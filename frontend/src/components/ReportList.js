@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 
 const ReportList = () => {
   const [reports, setReports] = useState([]);
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/reports');
+        const res = await axios.get(`${baseURL}/reports`);
         setReports(res.data);
       } catch (err) {
         console.error('Error fetching reports:', err);

@@ -3,6 +3,8 @@ import React from 'react';
 import { Home, PlusCircle, User } from 'lucide-react';
 
 const Footer = () => {
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+  
   return (
     <footer className="fixed bottom-0 w-full bg-white border-t shadow md:hidden z-40">
       <div className="flex justify-around items-center py-2">
