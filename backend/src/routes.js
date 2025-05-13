@@ -62,10 +62,6 @@ router.put('/admin/users/:id', authenticateToken, updateUserRoleOrStatus);
 
 module.exports = router;
 
-
-/**
- * Note: You need to define the controller functions (e.g. registerUser, createReport, etc.)
- * inside separate controller files and import them above. Also, configure middleware for authentication,
- * validation, file uploads, etc., and wire up this router file in your `app.js` or `server.js` file.
- */
-
+// Backend API URL
+// 🔍  Inspect: https://vercel.com/brianoyaros-projects/mombasa-app-backend/5TtbQuF2JgxuRDnASoQPdPyBTpuV 
+// ✅  Production: https://mombasa-app-backend-prjtmhoeu-brianoyaros-projects.vercel.app 
