@@ -27,4 +27,4 @@ const upload = multer({
   limits: { files: 5 } // optional: limit number of files
 });
 
-module.exports = upload;
+module.exports = { upload };

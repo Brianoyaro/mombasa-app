@@ -18,11 +18,13 @@ const { getAllUsers, updateUserRoleOrStatus } = require('../controllers/userCont
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 
-console.log(typeof authenticateToken); // should log 'function'
-console.log(typeof logoutUser);        // should log 'function'
+// console.log(typeof authenticateToken); // should log 'function'
+// console.log(typeof logoutUser);        // should log 'function'
 
 
-router.post('/logout', authenticateToken, logoutUser);
+// router.post('/logout', authenticateToken, logoutUser);
+// Line 27 below is for debugging purposes because we need a token to log the user in play.
+router.post('/logout', logoutUser);
 router.post('/profile', authenticateToken, updateUserProfile);
 
 // Reports
