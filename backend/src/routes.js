@@ -23,8 +23,10 @@ router.post('/login', loginUser);
 
 
 // router.post('/logout', authenticateToken, logoutUser);
-// Line 27 below is for debugging purposes because we need a token to log the user in play.
+// Line 27 and 28 below are for debugging purposes because we need a token to log the user in play.
 router.post('/logout', logoutUser);
+router.get('/', (req, res) => {res.send('API is running...');});
+
 router.post('/profile', authenticateToken, updateUserProfile);
 
 // Reports
