@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const axios = require('axios');
+const { useNavigate } = require('react-router-dom');
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    const token = localStorage.getItem('token');
+    if (token) {
+        navigate('/dashboard');
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ 
@@ -28,10 +38,10 @@ const LoginForm = () => {
       if (!response.status === 200) {
         throw new Error(data.message || 'Login failed');
       }
-      // You can store token in localStorage or redirect as needed
-      console.log('Login successful:', data);
-      // Example: localStorage.setItem('token', data.token);
-      // navigate('/dashboard');
+      // console.log('Login successful:', data);
+      localStorage.setItem('token', data.token);
+      setTimeout(() => navigate('/dashboard'), 1000);
+
     } catch (err) {
       setError(err.message);
     } finally {
