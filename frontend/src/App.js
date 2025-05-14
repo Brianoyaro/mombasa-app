@@ -1,10 +1,10 @@
 // src/App.jsx
 import React from 'react';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './components/LoginForm';
+import Register from './components/RegisterForm';
 
 const App = () => {
   return (
