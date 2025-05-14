@@ -7,7 +7,7 @@ exports.registerUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const [result] = await db.execute(
-      'INSERT INTO users (username, email, password_hash, phone_number) VALUES (?, ?, ?, ?)',
+      'INSERT INTO mombasa_app_users (username, email, password_hash, phone_number) VALUES (?, ?, ?, ?)',
       [username, email, hashedPassword, phone_number]
     );
     res.status(201).json({ message: 'User registered', userId: result.insertId });
@@ -19,7 +19,7 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    const [rows] = await db.execute('SELECT * FROM mombasa_app_users WHERE email = ?', [email]);
     const user = rows[0];
     if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -44,7 +44,7 @@ exports.logoutUser = (req, res) => {
 exports.updateUserProfile = async (req, res) => {
   const { id, username, phone_number } = req.body;
   try {
-    await db.execute('UPDATE users SET username = ?, phone_number = ? WHERE id = ?', [username, phone_number, id]);
+    await db.execute('UPDATE mombasa_app_users SET username = ?, phone_number = ? WHERE id = ?', [username, phone_number, id]);
     res.json({ message: 'Profile updated' });
   } catch (error) {
     res.status(500).json({ error: error.message });

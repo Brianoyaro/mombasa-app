@@ -1,16 +1,27 @@
 // src/App.jsx
 import React from 'react';
-import MainLayout from './components/layout/MainLayout';
-import ReportList from './components/ReportList';
-// import ReportForm from './components/ReportForm';
-// Import routes as needed
+import { BrowserRouter, Routes } from 'react-router-dom';
+
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Register from './components/Register';
 
 const App = () => {
   return (
-    <MainLayout>
-      {/* Routes or component views go here */}
-      <ReportList />
-    </MainLayout>
+    // <MainLayout>
+    //   {/* Routes or component views go here */}
+    //   <ReportList />
+    // </MainLayout>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          {/* Add more routes as needed */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 

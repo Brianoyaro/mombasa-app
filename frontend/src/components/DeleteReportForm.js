@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,13 @@ const DeleteReportForm = ({ reportId }) => {
   const navigate = useNavigate();
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleDelete = async () => {
     try {
