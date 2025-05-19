@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-const axios = require('axios');
-const { useNavigate } = require('react-router-dom');
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -99,9 +100,9 @@ const LoginForm = () => {
 
           <p className="text-center text-sm text-gray-500">
             Don’t have an account?{' '}
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link to="/register" className="text-blue-600 hover:underline">
               Register
-            </a>
+            </Link>
           </p>
         </form>
       </div>

@@ -3,8 +3,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard';
-import Login from './components/LoginForm';
-import Register from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 const App = () => {
   return (
@@ -17,8 +17,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           {/* Add more routes as needed */}
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/register' element={<RegisterForm />} />
         </Routes>
       </div>
     </BrowserRouter>

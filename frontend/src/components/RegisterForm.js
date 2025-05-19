@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,17 @@ const RegistrationForm = () => {
   useEffect(() => {
     // Check if the user is already logged in
     const token = localStorage.getItem('token');
+    console.log(process.env);
+    // if (token) {
+    //   // If the user is logged in, redirect to the dashboard
+    //   const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    //   if (!decoded) {
+    //     localStorage.removeItem('token');
+    //     navigate('/login');
+    //   } else {
+    //     navigate('/dashboard');
+    //   }
+    // }
     if (token) {
         navigate('/dashboard');
     }
@@ -169,6 +182,12 @@ const RegistrationForm = () => {
           >
             {loading ? 'Registering...' : 'Register'}
           </button>
+          <p className="text-center text-sm text-gray-500">
+            Already have an account?{' '}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </div>
