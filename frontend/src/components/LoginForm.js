@@ -48,7 +48,7 @@ const LoginForm = () => {
       localStorage.setItem('token', data.token);
 
       // set the user in redux store
-      dispatch(setCurrentUser(data.user)); // Assuming your API returns user data alongside the token!!!!!!!
+      dispatch(setCurrentUser(data.user));
       
       setTimeout(() => navigate('/dashboard'), 1000);
 

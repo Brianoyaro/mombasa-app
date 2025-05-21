@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const ReportDetail = () => {
   const { id } = useParams();
@@ -8,15 +10,11 @@ const ReportDetail = () => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
 
-  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';  
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    // Assuming current user is stored in localStorage as a JSON string
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) setCurrentUser(user);
-
     const fetchData = async () => {
       try {
         const reportRes = await axios.get(`${baseURL}/reports/${id}`);
