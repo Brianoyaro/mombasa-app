@@ -33,18 +33,22 @@ exports.loginUser = async (req, res) => {
     // res.json({ token });
     
     // Optionally, you can set the token in a cookie
-    // res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 3600000 }); // 1 hour
+    res.cookie('token', token,
+      { 
+        httpOnly: true,
+        secure: false, // Set to true if using HTTPS
+        sameSite: 'lax', // or 'Strict'
+        maxAge: 3600000 
+      }); // 1 hour
 
     // send the token and the user data
     res.json({ 
-      token,
       user: 
         {
           id: user.id,
           username: user.username,
           email: user.email,
           phone_number: user.phone_number,
-          role: user.role
         }
     });
 
@@ -55,6 +59,7 @@ exports.loginUser = async (req, res) => {
 
 exports.logoutUser = (req, res) => {
   // Frontend should discard token – stateless logout
+  res.clearCookie('token');
   res.json({ message: 'Logged out successfully' });
 };
 

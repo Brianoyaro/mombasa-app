@@ -17,10 +17,10 @@ const ReportDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reportRes = await axios.get(`${baseURL}/reports/${id}`);
+        const reportRes = await axios.get(`${baseURL}/reports/${id}`, {withCredentials: true});
         setReport(reportRes.data);
 
-        const commentsRes = await axios.get(`${baseURL}/reports/${id}/comments`);
+        const commentsRes = await axios.get(`${baseURL}/reports/${id}/comments`, {withCredentials: true});
         setComments(commentsRes.data);
       } catch (err) {
         console.error('Failed to fetch report or comments', err);
@@ -39,7 +39,7 @@ const ReportDetail = () => {
     try {
       const res = await axios.post(`${baseURL}/reports/${id}/comments`, {
         text: commentInput,
-      });
+      }, {withCredentials: true});
 
       // Assume API response includes username and user_id
       setComments([res.data, ...comments]);
@@ -51,8 +51,9 @@ const ReportDetail = () => {
 
   const handleVote = async (type) => {
     try {
-      await axios.post(`${baseURL}/reports/${id}/vote`, { type });
-      const updatedReport = await axios.get(`${baseURL}/reports/${id}`);
+      await axios.post(`${baseURL}/reports/${id}/vote`, { type }, {withCredentials: true});
+      // Refresh the report data to get updated vote counts
+      const updatedReport = await axios.get(`${baseURL}/reports/${id}`, {withCredentials: true});
       setReport(updatedReport.data);
     } catch (err) {
       console.error('Vote failed', err);

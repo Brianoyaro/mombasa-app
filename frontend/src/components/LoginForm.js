@@ -31,6 +31,10 @@ const LoginForm = () => {
     });
   };
 
+  // ✋ Check if user has accepted cookies
+  const hasUserConsented = () =>
+    document.cookie.includes("userConsent=true");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -45,11 +49,14 @@ const LoginForm = () => {
         throw new Error(data.message || 'Login failed');
       }
       // console.log('Login successful:', data);
-      localStorage.setItem('token', data.token);
+      // localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+       // ✋ Prevent login if user hasn't accepted cookies
+      if (!hasUserConsented()) {
+        setError("You must accept cookies to log in.");
+        return;
+      }
 
-      // set the user in redux store
-      dispatch(setCurrentUser(data.user));
-      
       setTimeout(() => navigate('/dashboard'), 1000);
 
     } catch (err) {

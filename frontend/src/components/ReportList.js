@@ -9,7 +9,9 @@ const ReportList = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await axios.get(`${baseURL}/reports`);
+        const res = await axios.get(`${baseURL}/reports`, {
+          withCredentials: true,
+        });
         setReports(res.data);
       } catch (err) {
         console.error('Error fetching reports:', err);

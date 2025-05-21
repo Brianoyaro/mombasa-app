@@ -2,20 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-// import { setCurrentUser } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../redux/userSlice";
-import { useSelector } from "react-redux";
+
 
 const LogoutUserLogic = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.currentUser);
-
+    const userData = localStorage.getItem("user");
+    const user = JSON.parse(userData);
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        // Clear user data from Redux store
-        dispatch(logoutUser());
+        localStorage.removeItem("user");
+        
 
         // Redirect to login page
         navigate("/login");

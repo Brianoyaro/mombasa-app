@@ -12,13 +12,12 @@ const UserProfile = () => {
 
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`${baseURL}/profile`, {
-          headers: { Authorization: `Bearer ${token}` }
+          withCredentials: true,
         });
 
         const { username, email, phone_number } = res.data;
@@ -30,7 +29,7 @@ const UserProfile = () => {
     };
 
     fetchProfile();
-  }, [token]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,10 +44,9 @@ const UserProfile = () => {
     try {
       const { username, phone_number } = formData;
       await axios.post(
-        `${baseURL}/profile`,
-        { username, phone_number },
+        `${baseURL}/profile`, { username, phone_number },
         {
-          headers: { Authorization: `Bearer ${token}` }
+          withCredentials: true,
         }
       );
 

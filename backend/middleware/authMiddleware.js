@@ -4,8 +4,9 @@ require('dotenv').config();
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key'; // Should be in env
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  // const authHeader = req.headers['authorization'];
+  // const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  const token = req.cookies.token;
 
   if (!token) return res.status(401).json({ message: 'No token provided' });
 
