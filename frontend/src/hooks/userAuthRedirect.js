@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const userAuthRedirect = ( redirectTo='/login') => {
+const useRequireAuth = ( redirectTo='/login') => {
     const navigate = useNavigate();
     const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
@@ -20,4 +20,4 @@ const userAuthRedirect = ( redirectTo='/login') => {
     }, [navigate, redirectTo]);
 };
 
-return userAuthRedirect;
+export default useRequireAuth;

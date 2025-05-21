@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import userAuthRedirect from '../hooks/userAuthRedirect';
+import useAuthRedirect from '../hooks/userAuthRedirect';
 
 
 const UserProfile = () => {
@@ -16,7 +16,7 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(false);
 
   // Redirect to login if not authenticated
-  userAuthRedirect('/login');
+  useAuthRedirect('/login');
 
   useEffect(() => {
     const fetchProfile = async () => {

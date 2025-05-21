@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import userAuthRedirect from '../hooks/userAuthRedirect';
+import useAuthRedirect from '../hooks/userAuthRedirect';
 
 // import { useSelector } from 'react-redux';
 
@@ -12,11 +12,12 @@ const ReportDetail = () => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'; 
   
   // Redirect to login if not authenticated
-  userAuthRedirect('/login');
+  useAuthRedirect('/login');
 
   useEffect(() => {
       const fetchProfile = async () => {
@@ -24,8 +25,8 @@ const ReportDetail = () => {
           const res = await axios.get(`${baseURL}/profile`, {
             withCredentials: true,
           });
-  
-          const currentUser = res.data;
+          setCurrentUser(res.data);
+          // const currentUser = res.data;
         } catch (error) {
           console.error(error);
         }
