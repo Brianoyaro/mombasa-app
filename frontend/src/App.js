@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import ReportForm from './components/ReportForm';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           {/* Add more routes as needed */}
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<RegisterForm />} />
+          <Route path="/report/new" element={<ReportForm />} />
         </Routes>
       </div>
     </BrowserRouter>
