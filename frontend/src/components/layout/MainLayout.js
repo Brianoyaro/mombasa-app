@@ -1,51 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../Navbar';
-import Sidebar from '../Sidebar';
-import Footer from '../Footer';
+// src/components/MainLayout.jsx
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Footer from '../Footer'; // Adjust path if needed
+import Navbar from '../Navbar'; // Optional
 
-const MainLayout = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      setIsSidebarOpen(!mobile); // Open sidebar by default on large screens
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const openSidebar = () => setIsSidebarOpen(true);
-  const closeSidebar = () => setIsSidebarOpen(false);
-
+const MainLayout = () => {
   return (
-    <div className="min-h-screen bg-gray-50 pt-14 pb-16 flex">
-      {/* Sidebar */}
-      <Sidebar
-        isOpen={isSidebarOpen}
-        closeSidebar={closeSidebar}
-        isMobile={isMobile}
-      />
+    <div className="flex flex-col min-h-screen">
+      {/* Optional: Navbar */}
+      <Navbar />
 
-      {/* Content Area */}
-      <div
-        className={`flex-1 transition-all duration-300 ease-in-out ${
-          !isMobile ? 'ml-64' : ''
-        }`}
-      >
-        <Navbar
-          openSidebar={openSidebar}
-          isMobile={isMobile}
-          isSidebarOpen={isSidebarOpen}
-        />
+      {/* Main content */}
+      <main className="flex-grow min-h-screen pxx-4 py-6 bg-gray-100 ">
+        <Outlet />
+      </main>
 
-        <main className="px-4 mt-4">{children}</main>
-      </div>
-
+      {/* Persistent Footer */}
       <Footer />
     </div>
   );

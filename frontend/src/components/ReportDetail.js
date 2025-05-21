@@ -33,7 +33,7 @@ const ReportDetail = () => {
       };
   
       fetchProfile();
-    }, []);
+    }, [baseURL]);
   
   // const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -53,7 +53,7 @@ const ReportDetail = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, baseURL]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +86,7 @@ const ReportDetail = () => {
   if (loading) return <p className="text-center py-10">Loading...</p>;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-3xl mx-auto px-4 py-8 dark:bg-gray-900 dark:text-white">
       {report && (
         <div className="bg-white p-6 rounded shadow mb-8">
           <h2 className="text-xl font-semibold mb-2">{report.title}</h2>

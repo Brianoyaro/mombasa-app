@@ -34,6 +34,7 @@
 
 // Sidebar.jsx
 import React from 'react';
+import LogoutButton from './LogoutButton';
 
 const Sidebar = ({ isOpen, closeSidebar, isMobile }) => {
   const baseClasses =
@@ -49,9 +50,10 @@ const Sidebar = ({ isOpen, closeSidebar, isMobile }) => {
     >
       <div className="p-4 border-b font-semibold text-lg">Menu</div>
       <div className="p-4 space-y-2">
-        <a href="/activity" className="block hover:text-blue-600">Recent Activity</a>
-        <a href="/profile" className="block hover:text-blue-600">Profile</a>
-        <a href="/logout" className="block hover:text-red-600">Logout</a>
+        <a href="/#" className="block hover:text-blue-600">Recent Activity</a>
+        <a href="/#" className="block hover:text-blue-600">Profile</a>
+        {/* <a href="/#" className="block hover:text-red-600">Logout</a> */}
+        <LogoutButton />
       </div>
 
       {isMobile && (

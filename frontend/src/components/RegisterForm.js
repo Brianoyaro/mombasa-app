@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import jwt from 'jsonwebtoken';
-
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -21,21 +19,9 @@ const RegistrationForm = () => {
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   useEffect(() => {
-    // Check if the user is already logged in
     const token = localStorage.getItem('token');
-    console.log(process.env);
-    // if (token) {
-    //   // If the user is logged in, redirect to the dashboard
-    //   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    //   if (!decoded) {
-    //     localStorage.removeItem('token');
-    //     navigate('/login');
-    //   } else {
-    //     navigate('/dashboard');
-    //   }
-    // }
     if (token) {
-        navigate('/dashboard');
+      navigate('/dashboard');
     }
   }, [navigate]);
 
@@ -47,7 +33,6 @@ const RegistrationForm = () => {
       [name]: value
     }));
 
-    // Clear password mismatch error when user types
     if (name === 'password' || name === 'confirmPassword') {
       setPasswordError('');
     }
@@ -73,7 +58,8 @@ const RegistrationForm = () => {
         password,
         phone_number
       });
-      setMessage('Registration successful!');
+
+      setMessage('✅ Registration successful!');
       setFormData({
         username: '',
         email: '',
@@ -82,109 +68,72 @@ const RegistrationForm = () => {
         phone_number: ''
       });
 
-      setTimeout(() => navigate('/login'), 1000); // navigate to login
+      setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Registration failed.');
+      setMessage(error.response?.data?.message || '❌ Registration failed.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Create Account</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 dark:bg-gray-900 dark:text-white transition-colors duration-300">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8">
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
+          Create an Account
+        </h2>
 
         {message && (
-          <div className="mb-4 text-sm text-center text-green-600">{message}</div>
+          <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">
+            {message}
+          </div>
         )}
 
         {passwordError && (
-          <div className="mb-4 text-sm text-center text-red-500">{passwordError}</div>
+          <div className="mb-4 text-sm text-center font-medium text-red-500">
+            {passwordError}
+          </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label htmlFor="username" className="block text-gray-600 text-sm mb-1">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              required
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-gray-600 text-sm mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-gray-600 text-sm mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirmPassword" className="block text-gray-600 text-sm mb-1">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={`w-full border rounded-md px-4 py-2 focus:outline-none ${
-                passwordError ? 'border-red-500' : 'focus:ring-2 focus:ring-blue-500'
-              }`}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone_number" className="block text-gray-600 text-sm mb-1">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          {[
+            { label: 'Username', name: 'username', type: 'text' },
+            { label: 'Email', name: 'email', type: 'email' },
+            { label: 'Password', name: 'password', type: 'password' },
+            { label: 'Confirm Password', name: 'confirmPassword', type: 'password' },
+            { label: 'Phone Number', name: 'phone_number', type: 'tel' }
+          ].map(({ label, name, type }) => (
+            <div key={name}>
+              <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {label}
+              </label>
+              <input
+                type={type}
+                name={name}
+                required={name !== 'phone_number'}
+                value={formData[name]}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 rounded-lg border ${
+                  name === 'confirmPassword' && passwordError
+                    ? 'border-red-500'
+                    : 'border-gray-300 dark:border-gray-600'
+                } bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition`}
+                placeholder={`Enter your ${label.toLowerCase()}`}
+              />
+            </div>
+          ))}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300 disabled:opacity-50"
           >
             {loading ? 'Registering...' : 'Register'}
           </button>
-          <p className="text-center text-sm text-gray-500">
+
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-600 hover:underline">
+            <Link to="/login" className="text-blue-600 dark:text-blue-400 hover:underline">
               Login
             </Link>
           </p>

@@ -25,7 +25,7 @@ const DeleteReportForm = ({ reportId }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-6 p-4 bg-white border rounded shadow">
+    <div className="max-w-md mx-auto mt-6 p-4 bg-white border rounded shadow dark:bg-gray-900 dark:text-white">
       {message && <div className="mb-4 p-2 bg-green-100 text-green-700 rounded">{message}</div>}
       {error && <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>}
 

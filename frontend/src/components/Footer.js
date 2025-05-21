@@ -1,25 +1,27 @@
-// Footer.jsx (mobile only)
 import React from 'react';
-import { Home, PlusCircle, User } from 'lucide-react';
+import { Home, PlusCircle, User, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  // const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
-  
   return (
-    <footer className="fixed bottom-0 w-full bg-white border-t shadow md:hidden z-40">
-      <div className="flex justify-around items-center py-2">
-        <a href="/home" className="flex flex-col items-center text-gray-700">
-          <Home size={20} />
-          <span className="text-xs">Home</span>
-        </a>
-        <a href="/report/new" className="flex flex-col items-center text-blue-600">
-          <PlusCircle size={24} />
-          <span className="text-xs">Add</span>
-        </a>
-        <a href="/profile" className="flex flex-col items-center text-gray-700">
-          <User size={20} />
-          <span className="text-xs">Profile</span>
-        </a>
+    <footer className="fixed bottom-0 w-full bg-white border-t shadow mdd:hidden z-40 dark:bg-gray-800">
+      <div className="max-w-md mx-auto flex justify-between items-center py-2 px-6">
+        <Link to="/" className="flex flex-col items-center text-gray-700 dark:text-white">
+          <Home className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="text-xs md:text-sm">Home</span>
+        </Link>
+        <Link to="/report/new" className="flex flex-col items-center text-blue-600 dark:text-blue-400">
+          <PlusCircle className="w-6 h-6 md:w-7 md:h-7" />
+          <span className="text-xs md:text-sm">Add</span>
+        </Link>
+        <Link to="/profile" className="flex flex-col items-center text-gray-700 dark:text-white">
+          <User className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="text-xs md:text-sm">Profile</span>
+        </Link>
+        <Link to="/settings" className="flex flex-col items-center text-gray-700 dark:text-white">
+          <Settings className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="text-xs md:text-sm">Settings</span>
+        </Link>
       </div>
     </footer>
   );

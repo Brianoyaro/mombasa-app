@@ -19,10 +19,10 @@ const ReportList = () => {
     };
 
     fetchReports();
-  }, []);
+  }, [baseURL]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6 dark:bg-gray-900 dark:text-white">
       <h2 className="text-2xl font-bold mb-4 text-center">Recent Reports</h2>
       {reports.length === 0 && (
         <p className="text-center text-gray-500">No reports available.</p>
