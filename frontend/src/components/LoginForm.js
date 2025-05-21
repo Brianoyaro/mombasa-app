@@ -3,11 +3,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../redux/userSlice';
+
+
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
@@ -41,6 +46,10 @@ const LoginForm = () => {
       }
       // console.log('Login successful:', data);
       localStorage.setItem('token', data.token);
+
+      // set the user in redux store
+      dispatch(setCurrentUser(data.user)); // Assuming your API returns user data alongside the token!!!!!!!
+      
       setTimeout(() => navigate('/dashboard'), 1000);
 
     } catch (err) {
