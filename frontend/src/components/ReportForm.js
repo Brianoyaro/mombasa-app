@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import userAuthRedirect from '../hooks/userAuthRedirect';
 
 const ReportForm = () => {
   const [title, setTitle] = useState('');
@@ -10,6 +11,8 @@ const ReportForm = () => {
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
+  // Redirect to login if not authenticated
+  userAuthRedirect('/login');
   
   const handleLocationDetection = () => {
     if (!navigator.geolocation) {

@@ -60,6 +60,11 @@ router.post('/departments/:id/assign/:departmentId', authenticateToken, assignDe
 router.get('/admin/users', authenticateToken, getAllUsers);
 router.put('/admin/users/:id', authenticateToken, updateUserRoleOrStatus);
 
+// confirm a user is logged in
+router.get('/isLoggedIn', authenticateToken, (req, res) => {
+  res.status(200).json({ message: 'User is logged in' });
+});
+
 module.exports = router;
 
 // Backend API URL

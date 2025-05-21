@@ -1,6 +1,7 @@
 import React, { useState, useEffect, use } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import userAuthRedirect from '../hooks/userAuthRedirect';
 
 const EditReportForm = () => {
   const { id } = useParams();
@@ -18,12 +19,7 @@ const EditReportForm = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' or 'error'
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-    }
-  }, [navigate]);
+  userAuthRedirect('/login');
 
   const flashMessage = (text, type = 'success') => {
     setMessage(text);

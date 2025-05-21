@@ -38,19 +38,9 @@ exports.loginUser = async (req, res) => {
         httpOnly: true,
         secure: false, // Set to true if using HTTPS
         sameSite: 'lax', // or 'Strict'
-        maxAge: 3600000 
-      }); // 1 hour
-
-    // send the token and the user data
-    res.json({ 
-      user: 
-        {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          phone_number: user.phone_number,
-        }
-    });
+        maxAge: 3600000 // 1 hour
+      });
+    res.status(200).json({ message: 'Login successful' });
 
   } catch (error) {
     res.status(500).json({ error: error.message });

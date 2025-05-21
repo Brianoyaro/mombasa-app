@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import userAuthRedirect from '../hooks/userAuthRedirect';
 
 
 import { useDispatch } from 'react-redux';
@@ -12,17 +13,10 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
-  useEffect(() => {
-    // Check if the user is already logged in
-    const token = localStorage.getItem('token');
-    if (token) {
-        navigate('/dashboard');
-    }
-  }, [navigate]);
+  // userAuthRedirect('/login');
 
   const handleChange = (e) => {
     setFormData({ 
@@ -49,9 +43,7 @@ const LoginForm = () => {
         throw new Error(data.message || 'Login failed');
       }
       // console.log('Login successful:', data);
-      // localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-       // ✋ Prevent login if user hasn't accepted cookies
+      // ✋ Prevent login if user hasn't accepted cookies
       if (!hasUserConsented()) {
         setError("You must accept cookies to log in.");
         return;
