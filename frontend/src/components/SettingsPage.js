@@ -1,7 +1,8 @@
 // SettingsPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Sun, Moon, ChevronRight } from 'lucide-react';
 import useTheme from '../hooks/useTheme';
+import AboutVersion from './AboutVersion';
 
 const SettingItem = ({ label, action, rightIcon }) => (
   <div
@@ -15,6 +16,7 @@ const SettingItem = ({ label, action, rightIcon }) => (
 
 const SettingsPage = () => {
   const { isDark, toggleTheme } = useTheme();
+  const [ showAbout, setShowAbout ] = useState(false);
 
   return (
     <div className="min-h-screen px-4 py-6 bg-gray-100 dark:bg-gray-900">
@@ -30,8 +32,13 @@ const SettingsPage = () => {
         <SettingItem label="Notifications" action={() => {}} rightIcon={<ChevronRight />} />
         <SettingItem label="Privacy" action={() => {}} rightIcon={<ChevronRight />} />
         <SettingItem label="Account Management" action={() => {}} rightIcon={<ChevronRight />} />
-        <SettingItem label="About & Version" action={() => {}} rightIcon={<ChevronRight />} />
+        <SettingItem label="About & Version" action={() => setShowAbout(!showAbout) } rightIcon={<ChevronRight />} />
       </div>
+      {showAbout && (
+        <div className="mt-6">
+          <AboutVersion />
+        </div>
+      )}
     </div>
   );
 };

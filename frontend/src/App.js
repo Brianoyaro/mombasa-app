@@ -10,6 +10,9 @@ import ReportForm from './components/ReportForm';
 import ReportDetail from './components/ReportDetail';
 import UserProfile from './components/UserProfile';
 import SettingsPage from './components/SettingsPage';
+import TermsOfService from './components/TermsandConditions';
+import PrivacyPolicy from './components/PrivacyPolicy';
+
 
 import useTheme from './hooks/useTheme';
 import MainLayout from './components/layout/MainLayout'; // Adjust path if needed
@@ -32,6 +35,8 @@ const App = () => {
               <Route path="/report/:id" element={<ReportDetail />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
           </Route>
         </Routes>
 
