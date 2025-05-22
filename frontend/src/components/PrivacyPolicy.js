@@ -21,7 +21,14 @@ const PrivacyPolicy = () => {
           We use the information to improve our service and contact users when necessary.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-2">3. Contact</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-2">3. Cookies</h2>
+        <p className="mb-4">
+          Our application may use cookies and similar tracking technologies to enhance your experience, analyze
+          usage patterns, and store preferences. You can choose to disable cookies through your browser settings,
+          but this may affect some functionality.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-2">4. Contact</h2>
         <p className="mb-6">
           If you have any questions, feel free to{' '}
           <a

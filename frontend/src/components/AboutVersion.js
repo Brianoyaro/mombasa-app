@@ -56,7 +56,7 @@ const AboutVersion = () => {
 
     <div className="mt-4 space-y-2">
         <a
-        href="https://github.com/your-repo"
+        href="https://github.com/Brianoyaro/mombasa-app"
         target="_blank"
         rel="noopener noreferrer"
         className="block text-sm sm:text-base md:text-lg text-blue-500 hover:underline"
