@@ -12,18 +12,20 @@ const RegistrationForm = () => {
   });
 
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     navigate('/dashboard');
+  //   }
+  // }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +44,8 @@ const RegistrationForm = () => {
     e.preventDefault();
     setMessage('');
     setPasswordError('');
+    setError('');
+    setSuccess('');
 
     if (formData.password !== formData.confirmPassword) {
       setPasswordError('Passwords do not match');
@@ -60,6 +64,7 @@ const RegistrationForm = () => {
       });
 
       setMessage('✅ Registration successful!');
+      setSuccess('Registration successful! Redirecting to login...');
       setFormData({
         username: '',
         email: '',
@@ -72,6 +77,7 @@ const RegistrationForm = () => {
     } catch (error) {
       console.error('Registration error:', error);
       setMessage(error.response?.data?.message || '❌ Registration failed.');
+      setError('Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -83,6 +89,16 @@ const RegistrationForm = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Create an Account
         </h2>
+        {error && (
+          <div className="mb-4 text-sm text-center font-medium text-red-500">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">
+            {success}
+          </div>
+        )}
 
         {message && (
           <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">

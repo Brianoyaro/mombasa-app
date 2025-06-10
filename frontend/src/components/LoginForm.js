@@ -5,6 +5,7 @@ import axios from 'axios';
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -32,14 +33,17 @@ const LoginForm = () => {
       const data = response.data;
       if (!response.status === 200) {
         throw new Error(data.message || 'Login failed');
+        setError("Invalid email or password.");
+        return;
       }
 
       if (!hasUserConsented()) {
         setError("You must accept cookies to log in.");
         return;
       }
-
-      setTimeout(() => navigate('/dashboard'), 1000);
+      setSuccess("Login successful! Redirecting...");
+      // document.cookie = "userConsent=true; path=/; max-age=31536000"; // 1 year cookie
+      setTimeout(() => navigate('/'), 1000);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,6 +53,16 @@ const LoginForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 dark:bg-gray-900 dark:text-white">
+      { error && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-800 px-4 py-2 rounded-md shadow-md">
+          <p className="text-sm">{error}</p>
+        </div>
+      )}
+      { success && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow-md">
+          <p className="text-sm">{success}</p>
+        </div>
+      )}
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8">
         <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white mb-6">
           Login to Your Account
