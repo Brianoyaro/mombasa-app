@@ -8,4 +8,6 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME
 });
 
+console.log(process.env);
+
 module.exports = pool;
