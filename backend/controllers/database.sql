@@ -9,8 +9,10 @@
 -- Port number: 3306
 
 -- mysql -h sql8.freesqldatabase.com -P 3306 -u sql8778768 -p 9thwJWzyMc
-drop database IF  EXISTS mombasa_app;
-use defaultdb;
+-- drop database IF  EXISTS mombasa_app;
+-- use defaultdb;
+-- mysql -h b696ywy3inpf9ujriaan-mysql.services.clever-cloud.com -P 3306 -u uc0n0fduahx4vf6g -p b696ywy3inpf9ujriaan
+use b696ywy3inpf9ujriaan;
 
 
 -- USERS
