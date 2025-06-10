@@ -4,7 +4,7 @@ const { authenticateToken } = require('../middleware/authMiddleware'); // Middle
 const { upload } = require('../middleware/multerMiddleware'); // Middleware for file uploads
 
 
-const { registerUser, loginUser, logoutUser, updateUserProfile } = require('../controllers/authController');
+const { registerUser, loginUser, logoutUser, updateUserProfile, getUserProfile } = require('../controllers/authController');
 const { createReport, getAllReportsWithVotesAndImages, getReportByIdWithVotesAndImages, updateReport, deleteReport } = require('../controllers/reportController');
 const { voteOnReport } = require('../controllers/voteController');
 const { getComments, postComment } = require('../controllers/commentController');
@@ -19,6 +19,8 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/logout', authenticateToken, logoutUser);
 router.post('/profile', authenticateToken, updateUserProfile);
+
+router.get('/profile', authenticateToken, getUserProfile); // Assuming you have a getUserProfile controller
 
 // Reports
 router.post('/reports', authenticateToken, createReport);

@@ -64,3 +64,23 @@ exports.updateUserProfile = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getUserProfile = async (req, res) => {
+  const user = req.user; // Extract user from the request object
+  console.log('Updating profile for user:', user);
+
+  let data = {
+    "username": user.username,
+    "email": user.email,
+    "phone_number": user.phone_number,
+  };
+  res.json(data);
+
+  // const { id, username, phone_number } = req.body;
+  // try {
+  //   await db.execute('UPDATE mombasa_app_users SET username = ?, phone_number = ? WHERE id = ?', [username, phone_number, id]);
+  //   res.json({ message: 'Profile updated' });
+  // } catch (error) {
+  //   res.status(500).json({ error: error.message });
+  // }
+};

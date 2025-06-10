@@ -14,6 +14,7 @@ const UserProfile = () => {
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
+  console.log(requestAnimationFrame.user)
   useAuthRedirect('/login');
 
   useEffect(() => {
