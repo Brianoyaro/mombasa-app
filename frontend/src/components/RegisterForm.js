@@ -70,6 +70,7 @@ const RegistrationForm = () => {
 
       setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
+      console.error('Registration error:', error);
       setMessage(error.response?.data?.message || '❌ Registration failed.');
     } finally {
       setLoading(false);

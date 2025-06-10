@@ -9,7 +9,8 @@
 -- Port number: 3306
 
 -- mysql -h sql8.freesqldatabase.com -P 3306 -u sql8778768 -p 9thwJWzyMc
-use sql8778768;
+drop database IF  EXISTS mombasa_app;
+use defaultdb;
 
 
 -- USERS
