@@ -6,6 +6,7 @@ exports.registerUser = async (req, res) => {
   const { username, email, password, phone_number } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword)
     const [result] = await db.execute(
       'INSERT INTO mombasa_app_users (username, email, password_hash, phone_number) VALUES (?, ?, ?, ?)',
       [username, email, hashedPassword, phone_number]
