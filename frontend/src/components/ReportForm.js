@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useAuthRedirect from '../hooks/userAuthRedirect';
-import { set } from '../../../backend/backend';
 
 const ReportForm = () => {
   const [title, setTitle] = useState('');
