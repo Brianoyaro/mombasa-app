@@ -12,7 +12,8 @@ const ReportForm = () => {
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   // Redirect to login if not authenticated
-  useAuthRedirect('/login');
+  const user = useAuthRedirect('/login');
+  console.log('User from ReportForm:', user);
   
   const handleLocationDetection = () => {
     if (!navigator.geolocation) {
@@ -71,11 +72,9 @@ const ReportForm = () => {
     try {
       // Submit report metadata first
       // userId and department_id
-      const profile_res = await axios.get(`${baseURL}/profile`, {
-        withCredentials: true,
-      });
-      const userId = profile_res.data.userId;
-      console.log('User ID from profile:', userId, 'user:', profile_res.data);
+      const isLoggedInData= await axios.get(`${baseURL}/isLoggedIn`, { withCredentials: true,});
+      const userId = isLoggedInData.data.user.userId;
+      console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile

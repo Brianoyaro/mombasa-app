@@ -15,6 +15,7 @@ function authenticateToken(req, res, next) {
     if (err) return res.status(403).json({ message: 'Invalid token' });
 
     req.user = user; // Add user data to the request object
+    console.log('user from verified token is:', user);
     // console.log('-----------------------------------------------------------------------------------------------')
     // // query the database for the user associated withthe id obtained from the token!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // console.log(user.userId, 'userId from token');

@@ -23,6 +23,7 @@ const useRequireAuth = ( redirectTo='/login') => {
         };
         checkAuth();
     }, [navigate, redirectTo]);
+    console.log('At userAuthRedirect hook, user is:', user);
     return user;
 };
 
