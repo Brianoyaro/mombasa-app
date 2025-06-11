@@ -28,10 +28,20 @@ exports.loginUser = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) return res.status(401).json({ error: 'Invalid password' });
 
+    const payload = {
+    userId: user.id,
+      email: user.email,
+      role: user.role,
+      phone_number: user.phone_number,
+      username: user.username
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
     // const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h' // or '7d', '30m', etc.
-    });
+    // const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    //   expiresIn: '1h' // or '7d', '30m', etc.
+    // });
     console.log('Generated token:', token, 'for user:', user);
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     console.log('Decoded token:', decodedToken);
