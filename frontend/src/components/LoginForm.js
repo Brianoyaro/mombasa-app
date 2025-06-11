@@ -33,9 +33,8 @@ const LoginForm = () => {
       const data = response.data;
       // console.log(data);
       if (!response.status === 200) {
-        throw new Error(data.message || 'Login failed');
         setError("Invalid email or password.");
-        return;
+        throw new Error(data.message || 'Login failed');
       }
 
       if (!hasUserConsented()) {
@@ -44,7 +43,7 @@ const LoginForm = () => {
       }
       setSuccess("Login successful! Redirecting...");
       // document.cookie = "userConsent=true; path=/; max-age=31536000"; // 1 year cookie
-      setTimeout(() => navigate('/'), 1000);
+      setTimeout(() => navigate('/'), 2000);
     } catch (err) {
       setError(err.message);
     } finally {

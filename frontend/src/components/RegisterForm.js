@@ -11,11 +11,11 @@ const RegistrationForm = () => {
     phone_number: ''
   });
 
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
@@ -42,13 +42,13 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
-    setPasswordError('');
+    // setMessage('');
+    // setPasswordError('');
     setError('');
     setSuccess('');
 
     if (formData.password !== formData.confirmPassword) {
-      setPasswordError('Passwords do not match');
+      setError('Passwords do not match');
       return;
     }
 
@@ -63,7 +63,7 @@ const RegistrationForm = () => {
         phone_number
       });
 
-      setMessage('✅ Registration successful!');
+      // setMessage('✅ Registration successful!');
       setSuccess('Registration successful! Redirecting to login...');
       setFormData({
         username: '',
@@ -76,7 +76,7 @@ const RegistrationForm = () => {
       setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
       console.error('Registration error:', error);
-      setMessage(error.response?.data?.message || '❌ Registration failed.');
+      // setMessage(error.response?.data?.message || '❌ Registration failed.');
       setError('Registration failed. Please try again.');
     } finally {
       setLoading(false);
@@ -99,12 +99,17 @@ const RegistrationForm = () => {
             {success}
           </div>
         )}
+        { success && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow-md">
+          <p className="text-sm">{success}</p>
+        </div>
+      )}
 
-        {message && (
+        {/* {message && (
           <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">
             {message}
           </div>
-        )}
+        )} */}
 
         {passwordError && (
           <div className="mb-4 text-sm text-center font-medium text-red-500">

@@ -15,7 +15,7 @@ const useRequireAuth = ( redirectTo='/login') => {
                 // Attempt to access a protected route
                 const res = await axios.get(`${baseURL}/isLoggedIn`, { withCredentials: true });
                 setUser(res.data.user);
-                console.log('User is authenticated:', user, 'and response from/isLoggedIn is:', res.data.user);
+                // console.log('User is authenticated:', user, 'and response from/isLoggedIn is:', res.data.user);
             } catch (err) {
                 // Not logged in, redirect to login page
                 navigate(redirectTo);
@@ -23,7 +23,7 @@ const useRequireAuth = ( redirectTo='/login') => {
         };
         checkAuth();
     }, [navigate, redirectTo]);
-    console.log('At userAuthRedirect hook, user is:', user);
+    // console.log('At userAuthRedirect hook, user is:', user);
     return user;
 };
 
