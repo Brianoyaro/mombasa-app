@@ -29,7 +29,7 @@ exports.loginUser = async (req, res) => {
     if (!valid) return res.status(401).json({ error: 'Invalid password' });
 
     const payload = {
-    userId: user.id,
+      userId: user.id,
       email: user.email,
       role: user.role,
       phone_number: user.phone_number,
@@ -83,6 +83,8 @@ exports.getUserProfile = async (req, res) => {
   console.log('Updating profile for user:', user);
 
   let data = {
+    "userId": user.id,
+    "role": user.role,
     "username": user.username,
     "email": user.email,
     "phone_number": user.phone_number,

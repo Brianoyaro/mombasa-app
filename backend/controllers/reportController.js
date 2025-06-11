@@ -5,11 +5,12 @@ exports.createReport = async (req, res) => {
   const { user_id, title, description, location, department_id } = req.body;
   try {
     const [result] = await db.execute(
-      'INSERT INTO mombasa_app_reports (user_id, title, description, location, department_id) VALUES (?, ?, ?, ?, ?)',
-      [user_id, title, description, location, department_id]
+      'INSERT INTO mombasa_app_reports (user_id, title, description, location) VALUES (?, ?, ?, ?)',
+      [user_id, title, description, location]
     );
     res.status(201).json({ message: 'Report created', reportId: result.insertId });
   } catch (error) {
+    console.error('Error creating report:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -25,6 +26,7 @@ exports.getAllReportsWithVotesAndImages = async (req, res) => {
     );
     res.json(reports);
   } catch (error) {
+    console.error('Error fetching reports:', error);
     res.status(500).json({ error: error.message });
   }
 };

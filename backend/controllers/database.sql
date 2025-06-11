@@ -15,6 +15,8 @@
 use b696ywy3inpf9ujriaan;
 
 
+
+
 -- USERS
 CREATE TABLE IF NOT EXISTS mombasa_app_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,18 +35,23 @@ CREATE TABLE IF NOT EXISTS mombasa_app_departments (
     contact_info TEXT
 );
 
+
 -- REPORTS
-CREATE TABLE IF NOT EXISTS mombasa_app_reports (
+-- drop table if exists mombasa_app_comments;
+-- drop table if exists mombasa_app_votes;
+-- drop table if exists mombasa_app_report_images;
+-- ALTER TABLE mombasa_app_report_departments DROP FOREIGN KEY mombasa_app_report_departments_ibfk_1;
+-- drop table if exists mombasa_app_report_departments;
+-- drop table if exists mombasa_app_reports;
+CREATE TABLE mombasa_app_reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     title TEXT NOT NULL,
     description TEXT,
     location TEXT,
-    department_id INT,
     status VARCHAR(20) DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES mombasa_app_users(id) ON DELETE SET NULL,
-    FOREIGN KEY (department_id) REFERENCES mombasa_app_departments(id) ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES mombasa_app_users(id) ON DELETE SET NULL
 );
 
 -- REPORT IMAGES
