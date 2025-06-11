@@ -11,21 +11,12 @@ const RegistrationForm = () => {
     phone_number: ''
   });
 
-  // const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [passwordError, setPasswordError] = useState('');
 
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     navigate('/dashboard');
-  //   }
-  // }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,15 +27,12 @@ const RegistrationForm = () => {
     }));
 
     if (name === 'password' || name === 'confirmPassword') {
-      // setPasswordError('');
       setError('');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setMessage('');
-    // setPasswordError('');
     setError('');
     setSuccess('');
 
@@ -64,7 +52,6 @@ const RegistrationForm = () => {
         phone_number
       });
 
-      // setMessage('✅ Registration successful!');
       setSuccess('Registration successful! Redirecting to login...');
       setFormData({
         username: '',
@@ -77,7 +64,6 @@ const RegistrationForm = () => {
       setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
       console.error('Registration error:', error);
-      // setMessage(error.response?.data?.message || '❌ Registration failed.');
       setError('Registration failed. Please try again.');
     } finally {
       setLoading(false);
@@ -105,19 +91,6 @@ const RegistrationForm = () => {
           <p className="text-sm">{success}</p>
         </div>
       )}
-
-        {/* {message && (
-          <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">
-            {message}
-          </div>
-        )} */}
-
-        {passwordError && (
-          <div className="mb-4 text-sm text-center font-medium text-red-500">
-            {passwordError}
-          </div>
-        )}
-
         <form onSubmit={handleSubmit} className="space-y-5">
           {[
             { label: 'Username', name: 'username', type: 'text' },
