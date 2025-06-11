@@ -7,7 +7,8 @@ exports.uploadReportImage = async (req, res) => {
   const { image_url } = req.body;
   console.log('Received image URL:', req.body.images, 'for report ID:', reportId);
   console.log('req.body:', req.body);
-  
+  console.log("entire req:", req);
+
   console.log('Uploading image for report ID:', reportId, 'with URL:', image_url);
   try {
     await db.execute('INSERT INTO mombasa_app_report_images (report_id, image_url) VALUES (?, ?)', [reportId, image_url]);
