@@ -20,6 +20,7 @@ const ReportList = () => {
 
     fetchReports();
   }, [baseURL]);
+  console.log('Fetched reports:', reports);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 dark:bg-gray-900 dark:text-white">

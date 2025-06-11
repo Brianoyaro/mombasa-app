@@ -78,21 +78,16 @@ const RegistrationForm = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Create an Account
         </h2>
-        {error && (
-          <div className="mb-4 text-sm text-center font-medium text-red-500">
-            {error}
-          </div>
-        )}
-        {success && (
-          <div className="mb-4 text-sm text-center font-medium text-green-600 dark:text-green-400">
-            {success}
-          </div>
-        )}
-        { success && (
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow-md">
-          <p className="text-sm">{success}</p>
+        { error && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-800 px-4 py-2 rounded-md shadow-md">
+          <p className="text-sm">{error}</p>
         </div>
       )}
+        { success && (
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded-md shadow-md">
+            <p className="text-sm">{success}</p>
+          </div>
+        )}        
         <form onSubmit={handleSubmit} className="space-y-5">
           {[
             { label: 'Username', name: 'username', type: 'text' },
