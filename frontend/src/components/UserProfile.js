@@ -25,7 +25,7 @@ const UserProfile = () => {
         });
         const { username, email, phone_number } = res.data;
         // This is a debugging line to check the response data. I think GET /profile is wrong
-        console.log(res.data);
+        console.log('GET /proile data', res.data);
         setFormData({ username, email, phone_number });
       } catch (error) {
         setMessage('Failed to load profile.');

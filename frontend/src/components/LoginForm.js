@@ -31,7 +31,7 @@ const LoginForm = () => {
         withCredentials: true,
       });
       const data = response.data;
-      console.log(data);
+      // console.log(data);
       if (!response.status === 200) {
         throw new Error(data.message || 'Login failed');
         setError("Invalid email or password.");
