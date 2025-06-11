@@ -44,7 +44,8 @@ const ReportList = () => {
             <div className="flex items-start gap-3">
               {report.images && report.images.length > 0 && (
                 <img
-                  src={report.images[0]}
+                  src={`${baseURL}${report.images[0]}`|| "https://via.placeholder.com/300"}
+                  // src={report.images[0]}
                   alt="Report"
                   className="w-full h-48 rounded object-cover"
                 />
