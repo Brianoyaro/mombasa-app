@@ -33,6 +33,8 @@ exports.loginUser = async (req, res) => {
       expiresIn: '1h' // or '7d', '30m', etc.
     });
     console.log('Generated token:', token, 'for user:', user);
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded token:', decodedToken);
     // res.json({ token });
     
     // Optionally, you can set the token in a cookie
