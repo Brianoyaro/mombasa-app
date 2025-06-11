@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { set } from "../../../backend/backend";
 
 const useRequireAuth = ( redirectTo='/login') => {
 
