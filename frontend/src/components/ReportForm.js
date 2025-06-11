@@ -77,6 +77,7 @@ const ReportForm = () => {
       // console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
       const userId = user?.userId;
       console.log('I am not using isLoggedInData, but userId from user after calling checkAuth hook:', userId);
+      console.log('I am about to submit a report');
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile
@@ -84,6 +85,7 @@ const ReportForm = () => {
         description,
         location,
       }, { withCredentials: true });
+      console.log("Finished submitting report metadata, response is:", res.data);
 
       console.log('Report submission response without images:', res.data, 'and created report id is:', res.data.reportId);
 
