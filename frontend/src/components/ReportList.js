@@ -20,7 +20,6 @@ const ReportList = () => {
 
     fetchReports();
   }, [baseURL]);
-  console.log('Fetched reports:', reports);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 dark:bg-gray-900 dark:text-white">
@@ -31,6 +30,10 @@ const ReportList = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {reports.map((report) => (
+
+          console.log(report),
+          // Debugging: Log each report to check its structure
+          
           <Link
             key={report.id}
             to={`/reports/${report.id}`}
