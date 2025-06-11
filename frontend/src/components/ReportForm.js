@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useAuthRedirect from '../hooks/userAuthRedirect';
+import { set } from '../../../backend/backend';
 
 const ReportForm = () => {
   const [title, setTitle] = useState('');
@@ -8,12 +9,13 @@ const ReportForm = () => {
   const [location, setLocation] = useState('');
   const [useAutoLocation, setUseAutoLocation] = useState(false);
   const [images, setImages] = useState([]);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
   // Redirect to login if not authenticated
   const user = useAuthRedirect('/login');
-  console.log('User from ReportForm:', user);
   
   const handleLocationDetection = () => {
     if (!navigator.geolocation) {
@@ -71,13 +73,11 @@ const ReportForm = () => {
 
     try {
       // Submit report metadata first
-      // userId and department_id
       // const isLoggedInData= await axios.get(`${baseURL}/isLoggedIn`, { withCredentials: true,});
       // const userId = isLoggedInData.data.user.userId;
       // console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
       const userId = user?.userId;
-      console.log('I am not using isLoggedInData, but userId from user after calling checkAuth hook:', userId);
-      console.log('I am about to submit a report');
+
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile
@@ -85,12 +85,8 @@ const ReportForm = () => {
         description,
         location,
       }, { withCredentials: true });
-      console.log("Finished submitting report metadata, response is:", res.data);
-
-      console.log('Report submission response without images:', res.data, 'and created report id is:', res.data.reportId);
 
       const reportId = res.data.reportId;
-      console.log('Report created with ID:', reportId, 'from response:', res.data);
       // Then upload images if any
       if (images.length > 0) {
         const formData = new FormData();
@@ -102,7 +98,9 @@ const ReportForm = () => {
         });
       }
 
-      alert('Report submitted successfully.');
+      setMessage('Report submitted successfully.');
+
+      // alert('Report submitted successfully.');
       setTitle('');
       setDescription('');
       setLocation('');
@@ -110,12 +108,25 @@ const ReportForm = () => {
       setUseAutoLocation(false);
     } catch (error) {
       console.error('Report submission failed', error);
+      setError('Failed to submit report.');
       alert('Failed to submit report.');
     }
   };
 
   return (
     <div className="max-w-2xl mx-auto p-4 bg-white rounded shadow mt-6 dark:bg-gray-900 dark:text-white">
+
+      {message && (
+        <div className="text-center mb-4 text-sm text-green-600 dark:text-green-400">
+          {message}
+        </div>
+      )}
+      {error && (
+        <div className="text-center mb-4 text-sm text-red-600 dark:text-red-400">
+          {error}
+        </div>
+      )}
+
       <h2 className="text-xl font-bold mb-4">Submit a Report</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 

@@ -38,15 +38,6 @@ exports.loginUser = async (req, res) => {
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    // const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
-    // const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    //   expiresIn: '1h' // or '7d', '30m', etc.
-    // });
-    console.log('Generated token:', token, 'for user:', user);
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token:', decodedToken);
-    // res.json({ token });
-    
     // Optionally, you can set the token in a cookie
     res.cookie('token', token,
       { 
@@ -90,12 +81,4 @@ exports.getUserProfile = async (req, res) => {
     "phone_number": user.phone_number,
   };
   res.json(data);
-
-  // const { id, username, phone_number } = req.body;
-  // try {
-  //   await db.execute('UPDATE mombasa_app_users SET username = ?, phone_number = ? WHERE id = ?', [username, phone_number, id]);
-  //   res.json({ message: 'Profile updated' });
-  // } catch (error) {
-  //   res.status(500).json({ error: error.message });
-  // }
 };
