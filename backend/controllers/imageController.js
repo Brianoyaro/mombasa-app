@@ -5,9 +5,10 @@ const db = require('../db/connection');
 exports.uploadReportImage = async (req, res) => {
   const reportId = req.params.id;
   const { image_url } = req.body;
-  console.log('Received image URL:', req.body.images, 'for report ID:', reportId);
+  console.log('Received image URL:', req.body.files, 'for report ID:', reportId);
   console.log('req.body:', req.body);
-  console.log("req.images:", req.images);
+  console.log("req.files:", req.files);
+  console.log('req.file:', req.file);
   // console.log("entire req:", req);
 
   console.log('Uploading image for report ID:', reportId, 'with URL:', image_url);
