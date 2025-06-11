@@ -9,6 +9,7 @@ exports.createReport = async (req, res) => {
       'INSERT INTO mombasa_app_reports (user_id, title, description, location) VALUES (?, ?, ?, ?)',
       [user_id, title, description, location]
     );
+    console.log('Report created with ID:', result.insertId);
     res.status(201).json({ message: 'Report created', reportId: result.insertId });
   } catch (error) {
     console.error('Error creating report:', error);
