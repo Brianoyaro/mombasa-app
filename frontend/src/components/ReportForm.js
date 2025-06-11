@@ -74,7 +74,8 @@ const ReportForm = () => {
       const profile_res = await axios.get(`${baseURL}/profile`, {
         withCredentials: true,
       });
-      const { userId } = profile_res.data;
+      const userId = profile_res.data.userId;
+      console.log('User ID from profile:', userId, 'user:', profile_res.data);
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile

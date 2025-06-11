@@ -2,6 +2,7 @@
 const db = require('../db/connection');
 
 exports.createReport = async (req, res) => {
+  console.log('Creating report with body:', req.body);
   const { user_id, title, description, location, department_id } = req.body;
   try {
     const [result] = await db.execute(
