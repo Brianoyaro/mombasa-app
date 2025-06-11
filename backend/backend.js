@@ -29,6 +29,24 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use('/api', router);
 
+
+app.use('/api', router);
+
+//----------------------------------------------------------
+// 👇 Global error handler (must be after all routes)
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    console.error('Multer error:', err);
+    return res.status(400).json({ error: err.message });
+  }
+
+  if (err) {
+    console.error('Unhandled error:', err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+// ---------------------------------------------------------
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
