@@ -13,8 +13,8 @@ const ReportList = () => {
           withCredentials: true,
         });
         setReports(res.data);
-        console.log('Fetched reports:', res.data); // Debugging: Log fetched reports
-        console.log("Reports: ", reports); // Debugging: Log reports state after fetching
+        // console.log('Fetched reports:', res.data); // Debugging: Log fetched reports
+        // console.log("Reports: ", reports); // Debugging: Log reports state after fetching
       } catch (err) {
         console.error('Error fetching reports:', err);
       }
@@ -44,7 +44,7 @@ const ReportList = () => {
             <div className="flex items-start gap-3">
               {report.images && report.images.length > 0 && (
                 <img
-                  src={report.images[0].url}
+                  src={report.images[0]}
                   alt="Report"
                   className="w-full h-48 rounded object-cover"
                 />
