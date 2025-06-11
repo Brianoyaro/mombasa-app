@@ -84,6 +84,8 @@ const ReportForm = () => {
         location,
       }, { withCredentials: true });
 
+      console.log('Report submission response without images:', res.data, 'and created report id is:', res.data.reportId);
+
       const reportId = res.data.reportId;
       console.log('Report created with ID:', reportId, 'from response:', res.data);
       // Then upload images if any
