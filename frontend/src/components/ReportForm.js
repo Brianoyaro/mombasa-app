@@ -72,9 +72,10 @@ const ReportForm = () => {
     try {
       // Submit report metadata first
       // userId and department_id
-      const isLoggedInData= await axios.get(`${baseURL}/isLoggedIn`, { withCredentials: true,});
-      const userId = isLoggedInData.data.user.userId;
-      console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
+      // const isLoggedInData= await axios.get(`${baseURL}/isLoggedIn`, { withCredentials: true,});
+      // const userId = isLoggedInData.data.user.userId;
+      // console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
+      const userId = user?.userId;
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile
@@ -83,7 +84,7 @@ const ReportForm = () => {
         location,
       }, { withCredentials: true });
 
-      const reportId = res.data.id;
+      const reportId = res.data.reportId;
 
       // Then upload images if any
       if (images.length > 0) {
