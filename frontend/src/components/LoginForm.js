@@ -45,7 +45,7 @@ const LoginForm = () => {
       // document.cookie = "userConsent=true; path=/; max-age=31536000"; // 1 year cookie
       setTimeout(() => navigate('/'), 2000);
     } catch (err) {
-      setError(err.message);
+      setError("Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -98,9 +98,6 @@ const LoginForm = () => {
               placeholder="••••••••"
             />
           </div>
-
-          {error && <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>}
-
           <button
             type="submit"
             disabled={loading}

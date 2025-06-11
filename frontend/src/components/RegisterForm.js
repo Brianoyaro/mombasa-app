@@ -63,7 +63,7 @@ const RegistrationForm = () => {
         phone_number: ''
       });
 
-      setTimeout(() => navigate('/login'), 1000);
+      setTimeout(() => navigate('/login'), 2000);
     } catch (error) {
       console.error('Registration error:', error);
       setError('Registration failed. Please try again.');
