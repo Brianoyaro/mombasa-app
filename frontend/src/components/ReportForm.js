@@ -71,16 +71,13 @@ const ReportForm = () => {
     try {
       // Submit report metadata first
       // userId and department_id
-      try {
-        const res = await axios.get(`${baseURL}/profile`, {
-          withCredentials: true,
-        });
-        const { userId } = res.data;
-        } catch (error) {
-          console.error(error);
-        }
+      const profile_res = await axios.get(`${baseURL}/profile`, {
+        withCredentials: true,
+      });
+      const { userId } = profile_res.data;
+
       const res = await axios.post(`${baseURL}/reports`, {
-        user_id: userId, // Assuming you have userId from profile
+        "user_id": userId, // Assuming you have userId from profile
         title,
         description,
         location,
