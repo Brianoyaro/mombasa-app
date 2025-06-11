@@ -36,7 +36,8 @@ const RegistrationForm = () => {
     }));
 
     if (name === 'password' || name === 'confirmPassword') {
-      setPasswordError('');
+      // setPasswordError('');
+      setError('');
     }
   };
 
