@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useAuthRedirect from '../hooks/userAuthRedirect';
+import { useNavigate } from 'react-router-dom';
 
 const ReportForm = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -106,6 +108,12 @@ const ReportForm = () => {
       setLocation('');
       setImages([]);
       setUseAutoLocation(false);
+
+      setTimeout(() => {
+        navigate('/'); // Redirect to home page after submission
+      }
+      , 1000); // Adjust the delay as needed
+
     } catch (error) {
       console.error('Report submission failed', error);
       setError('Failed to submit report.');
