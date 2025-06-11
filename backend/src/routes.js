@@ -64,7 +64,7 @@ router.put('/admin/users/:id', authenticateToken, updateUserRoleOrStatus);
 
 // confirm a user is logged in
 router.get('/isLoggedIn', authenticateToken, (req, res) => {
-  res.status(200).json({ message: 'User is logged in' });
+  res.status(200).json({ message: 'User is logged in' , user: req.user});
 });
 
 module.exports = router;
