@@ -42,6 +42,7 @@ const ReportList = () => {
             className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col gap-4"
           >
             <div className="flex items-start gap-3">
+              {report.images && report.images.length > 0 && console.log(report.images[0])}
               {report.images && report.images.length > 0 && (
                 <img
                   src={`${baseURL}${report.images[0]}`|| "https://via.placeholder.com/300"}
