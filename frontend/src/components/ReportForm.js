@@ -76,6 +76,7 @@ const ReportForm = () => {
       // const userId = isLoggedInData.data.user.userId;
       // console.log('User ID from profile:', userId, 'user:', isLoggedInData.data);
       const userId = user?.userId;
+      console.log('I am not using isLoggedInData, but userId from user after calling checkAuth hook:', userId);
 
       const res = await axios.post(`${baseURL}/reports`, {
         "user_id": userId, // Assuming you have userId from profile
