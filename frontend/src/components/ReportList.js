@@ -13,6 +13,8 @@ const ReportList = () => {
           withCredentials: true,
         });
         setReports(res.data);
+        console.log('Fetched reports:', res.data); // Debugging: Log fetched reports
+        console.log("Reports: ", reports); // Debugging: Log reports state after fetching
       } catch (err) {
         console.error('Error fetching reports:', err);
       }
