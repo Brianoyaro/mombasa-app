@@ -45,7 +45,7 @@ const LoginForm = () => {
       // document.cookie = "userConsent=true; path=/; max-age=31536000"; // 1 year cookie
       setTimeout(() => navigate('/'), 2000);
     } catch (err) {
-      setError("Invalid email or password.");
+      setError("Login Failed. Invalid email or password.");
     } finally {
       setLoading(false);
     }
