@@ -15,7 +15,16 @@ app.use(cors({
   origin: "https://mombasa-app-frontend.onrender.com", //http://localhost:3000", // Replace with your frontend URL
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
  })); // Allow all origins
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'Public/uploads')));
+
+// create uploads directory if it doesn't exist
+const fs = require('fs');
+const uploadPath = path.join(__dirname, 'Public/uploads');
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+
 
 
 app.use('/api', router);
