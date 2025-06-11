@@ -14,7 +14,7 @@ const UserProfile = () => {
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
-  console.log(requestAnimationFrame.user)
+  //console.log(req.user)
   useAuthRedirect('/login');
 
   useEffect(() => {
@@ -24,6 +24,8 @@ const UserProfile = () => {
           withCredentials: true,
         });
         const { username, email, phone_number } = res.data;
+        // This is a debugging line to check the response data. I think GET /profile is wrong
+        console.log(res.data);
         setFormData({ username, email, phone_number });
       } catch (error) {
         setMessage('Failed to load profile.');

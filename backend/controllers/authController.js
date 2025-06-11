@@ -32,6 +32,7 @@ exports.loginUser = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h' // or '7d', '30m', etc.
     });
+    console.log('Generated token:', token, 'for user:', user);
     // res.json({ token });
     
     // Optionally, you can set the token in a cookie
