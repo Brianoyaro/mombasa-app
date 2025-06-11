@@ -14,6 +14,7 @@ const RegistrationForm = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
@@ -37,6 +38,7 @@ const RegistrationForm = () => {
     setSuccess('');
 
     if (formData.password !== formData.confirmPassword) {
+      setPasswordError(true);
       setError('Passwords do not match');
       return;
     }
