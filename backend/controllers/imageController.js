@@ -14,15 +14,16 @@ exports.uploadReportImage = async (req, res) => {
   // if (req.files) {
   //   image_url = '/uploads/' + req.files.filename;
   // }
-
-  console.log('Uploading image for report ID:', reportId, 'with URL:', image_url);
+  console.log("About to insert image URL:", image_url, "for report ID:", reportId);
   try {
     if (image_url.length === 0) {
       return res.status(400).json({ error: 'No images uploaded' });
     } else if (image_url.length > 1) {
       for (const url of image_url) {
+        console.log('Inserting image URL:', url);
         await db.execute('INSERT INTO mombasa_app_report_images (report_id, image_url) VALUES (?, ?)', [reportId, url]);
       }
+      console.log('All images inserted successfully');
       return res.status(201).json({ message: 'Images uploaded successfully' });
     }
     // Insert the image URL into the database

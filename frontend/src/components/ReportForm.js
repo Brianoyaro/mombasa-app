@@ -91,6 +91,7 @@ const ReportForm = () => {
         const formData = new FormData();
         images.forEach((image) => formData.append('images', image));
 
+        // Image uploading is pending when I upload an image. There is something wrong with the backend!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         await axios.post(`${baseURL}/reports/${reportId}/images`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
           withCredentials: true,
