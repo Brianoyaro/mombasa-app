@@ -64,7 +64,7 @@ const ReportDetail = () => {
       // I need report_id, user_id and comment text
       const commentData = {
         report_id: id,
-        user_id: currentUser.id, // Assuming currentUser has an id
+        user_id: currentUser.userId, // Assuming currentUser has an id
         comment: commentInput,
       };
       console.log('About to submit the following comment data:', commentData);
@@ -86,7 +86,7 @@ const ReportDetail = () => {
       // I need report_id, user_id and vote_type
       const voteData = {
         report_id: id,
-        user_id: currentUser.id, // Assuming currentUser has an id
+        user_id: currentUser.userId, // Assuming currentUser has an id
         vote_type: type === 'upvote' ? 'up' : 'down',
       };
       await axios.post(`${baseURL}/reports/${id}/vote`, voteData, {withCredentials: true});
@@ -162,7 +162,7 @@ const ReportDetail = () => {
             <div key={comment.id} className="bg-white p-3 rounded shadow">
               <div className="flex justify-between items-center mb-1">
                 <p className="font-semibold text-sm text-gray-800">
-                  {currentUser && comment.user_id === currentUser.id
+                  {currentUser && comment.user_id === currentUser.userId
                     ? 'You'
                     : comment.username}
                 </p>
