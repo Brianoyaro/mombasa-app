@@ -12,28 +12,28 @@ const ReportDetail = () => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'; 
   
   // Redirect to login if not authenticated
-  useAuthRedirect('/login');
+  const currentUser = useAuthRedirect('/login');
 
-  useEffect(() => {
-      const fetchProfile = async () => {
-        try {
-          const res = await axios.get(`${baseURL}/profile`, {
-            withCredentials: true,
-          });
-          setCurrentUser(res.data);
-          // const currentUser = res.data;
-        } catch (error) {
-          console.error(error);
-        }
-      };
+  // useEffect(() => {
+  //     const fetchProfile = async () => {
+  //       try {
+  //         const res = await axios.get(`${baseURL}/profile`, {
+  //           withCredentials: true,
+  //         });
+  //         setCurrentUser(res.data);
+  //         // const currentUser = res.data;
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     };
   
-      fetchProfile();
-    }, [baseURL]);
+  //     fetchProfile();
+  //   }, [baseURL]);
   
   // const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -60,9 +60,16 @@ const ReportDetail = () => {
     if (!commentInput.trim()) return;
 
     try {
-      const res = await axios.post(`${baseURL}/reports/${id}/comments`, {
-        text: commentInput,
-      }, {withCredentials: true});
+      // I need report_id, user_id and comment text
+      const commentData = {
+        report_id: id,
+        user_id: currentUser.id, // Assuming currentUser has an id
+        comment: commentInput,
+      };
+      const res = await axios.post(`${baseURL}/reports/${id}/comments`, commentData, {withCredentials: true});
+      // const res = await axios.post(`${baseURL}/reports/${id}/comments`, {
+      //   text: commentInput,
+      // }, {withCredentials: true});
 
       // Assume API response includes username and user_id
       setComments([res.data, ...comments]);
@@ -74,7 +81,14 @@ const ReportDetail = () => {
 
   const handleVote = async (type) => {
     try {
-      await axios.post(`${baseURL}/reports/${id}/vote`, { type }, {withCredentials: true});
+      // I need report_id, user_id and vote_type
+      const voteData = {
+        report_id: id,
+        user_id: currentUser.id, // Assuming currentUser has an id
+        vote_type: type === 'upvote' ? 'up' : 'down',
+      };
+      await axios.post(`${baseURL}/reports/${id}/vote`, voteData, {withCredentials: true});
+      // await axios.post(`${baseURL}/reports/${id}/vote`, { type }, {withCredentials: true});
       // Refresh the report data to get updated vote counts
       const updatedReport = await axios.get(`${baseURL}/reports/${id}`, {withCredentials: true});
       setReport(updatedReport.data);
@@ -93,7 +107,12 @@ const ReportDetail = () => {
           <p className="mb-4 text-gray-700">{report.description}</p>
           {report.images && report.images.length > 0 && (
             <img
-              src={report.images[0].url}
+              src={
+                report.images && report.images[0]
+                ? report.images[0] // Cloudinary gives full URL
+                : "https://via.placeholder.com/300"
+              }
+              // src={report.images[0].url}
               alt="Report"
               className="w-full h-auto mb-4 rounded"
             />
@@ -103,13 +122,13 @@ const ReportDetail = () => {
               onClick={() => handleVote('upvote')}
               className="hover:text-green-600"
             >
-              ⬆️ Upvote ({report.upvotes || 0})
+              ⬆️ 👍 Upvote ({report.upvotes || 0})
             </button>
             <button
               onClick={() => handleVote('downvote')}
               className="hover:text-red-600"
             >
-              ⬇️ Downvote ({report.downvotes || 0})
+              ⬇️ 👎 Downvote ({report.downvotes || 0})
             </button>
           </div>
         </div>
