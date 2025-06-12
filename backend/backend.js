@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -27,11 +30,11 @@ app.use(cors({
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 
-console.log("Serving static files from:", path.join(__dirname, 'public/uploads'));
-fs.readdir(path.join(__dirname, 'public/uploads') , (err, files) => {
-  if (err) return console.error('❌ Failed to list files:', err);
-  console.log('📂 Files in /public/uploads:', files);
-});
+// console.log("Serving static files from:", path.join(__dirname, 'public/uploads'));
+// fs.readdir(path.join(__dirname, 'public/uploads') , (err, files) => {
+//   if (err) return console.error('❌ Failed to list files:', err);
+//   console.log('📂 Files in /public/uploads:', files);
+// });
 // app.use('/api', router);
 
 
