@@ -18,6 +18,7 @@ const ReportDetail = () => {
   
   // Redirect to login if not authenticated
   const currentUser = useAuthRedirect('/login');
+  console.log('Current User:', currentUser);
 
   // useEffect(() => {
   //     const fetchProfile = async () => {
