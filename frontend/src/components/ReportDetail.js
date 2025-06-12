@@ -12,6 +12,8 @@ const ReportDetail = () => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
   // const [currentUser, setCurrentUser] = useState(null);
 
   const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'; 
@@ -47,9 +49,12 @@ const ReportDetail = () => {
         const commentsRes = await axios.get(`${baseURL}/reports/${id}/comments`, {withCredentials: true});
         setComments(commentsRes.data);
       } catch (err) {
+        setError('Failed to fetch report. Please retry...')
         console.error('Failed to fetch report or comments', err);
       } finally {
         setLoading(false);
+        console.log('Report data:', report);
+        console.log('Comments data:', comments);
       }
     };
 
@@ -76,7 +81,9 @@ const ReportDetail = () => {
       // Assume API response includes username and user_id
       setComments([res.data, ...comments]);
       setCommentInput('');
+      setSuccess('Comment submitted successfully!');
     } catch (err) {
+      setError('Failed to submit comment. Please try again.');
       console.error('Failed to submit comment', err);
     }
   };
@@ -94,7 +101,9 @@ const ReportDetail = () => {
       // Refresh the report data to get updated vote counts
       const updatedReport = await axios.get(`${baseURL}/reports/${id}`, {withCredentials: true});
       setReport(updatedReport.data);
+      setSuccess(`Successfully ${type === 'upvote' ? 'upvoted' : 'downvoted'} the report!`);
     } catch (err) {
+      setError('Failed to record vote. Please try again.');
       console.error('Vote failed', err);
     }
   };
@@ -103,6 +112,16 @@ const ReportDetail = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 dark:bg-gray-900 dark:text-white">
+      {error && (
+        <div className="bg-red-100 text-red-800 p-4 rounded mb-4">
+          <p>{error}</p>
+        </div>
+      )}
+      {success && (
+        <div className="bg-green-100 text-green-800 p-4 rounded mb-4">
+          <p>{success}</p>
+        </div>
+      )}
       {report && (
         <div className="bg-white p-6 rounded shadow mb-8">
           <h2 className="text-xl font-semibold mb-2">{report.title}</h2>
