@@ -25,9 +25,8 @@ app.use(cors({
   }
   
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-
-
-app.use('/api', router);
+console.log("Serving static files from:", path.join(__dirname, 'public/uploads'));
+// app.use('/api', router);
 
 
 app.use('/api', router);
