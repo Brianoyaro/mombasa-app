@@ -45,7 +45,11 @@ const ReportList = () => {
               {report.images && report.images.length > 0 && console.log(report.images[0])}
               {report.images && report.images.length > 0 && (
                 <img
-                  src={`${baseURL}${report.images[0]}`|| ${baseURL}/uploads/${default.jpg} || "https://via.placeholder.com/300"}
+                  src={
+                    (report.images && report.images[0]
+                      ? `${baseURL}${report.images[0]}`
+                      : "https://via.placeholder.com/300")
+                  }
                   // src={report.images[0]}
                   alt="Report"
                   className="w-full h-48 rounded object-cover"
