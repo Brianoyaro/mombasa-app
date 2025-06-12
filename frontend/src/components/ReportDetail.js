@@ -66,6 +66,7 @@ const ReportDetail = () => {
         user_id: currentUser.id, // Assuming currentUser has an id
         comment: commentInput,
       };
+      console.log('About to submit the following comment data:', commentData);
       const res = await axios.post(`${baseURL}/reports/${id}/comments`, commentData, {withCredentials: true});
       // const res = await axios.post(`${baseURL}/reports/${id}/comments`, {
       //   text: commentInput,

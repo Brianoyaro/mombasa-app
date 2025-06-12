@@ -24,12 +24,13 @@ exports.getComments = async (req, res) => {
 
 
 exports.postComment = async (req, res) => {
-  const reportId = req.params.id;
-  const { user_id, comment } = req.body;
+  // const reportId = req.params.id;
+  const { report_id, user_id, comment } = req.body;
   try {
-    await db.execute('INSERT INTO mombasa_app_comments (report_id, user_id, comment) VALUES (?, ?, ?)', [reportId, user_id, comment]);
+    await db.execute('INSERT INTO mombasa_app_comments (report_id, user_id, comment) VALUES (?, ?, ?)', [report_id, user_id, comment]);
     res.status(201).json({ message: 'Comment added' });
   } catch (error) {
+    console.error('Error submiting comment data to the database: ', error);
     res.status(500).json({ error: error.message });
   }
 };
